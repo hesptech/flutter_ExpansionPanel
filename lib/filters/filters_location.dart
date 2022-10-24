@@ -20,8 +20,6 @@ class FiltersLocation extends StatefulWidget {
 class _FiltersLocationState extends State<FiltersLocation> {
 
   late List<bool> _openCloseIcons;
-  late List<PropertiesToronto> _propertiesToronto;
-  late List<String> _filtersPropertyToronto;
 
   late bool toronto;
 
@@ -36,13 +34,6 @@ class _FiltersLocationState extends State<FiltersLocation> {
       false,
     ];     
 
-    _propertiesToronto = <PropertiesToronto>[
-      const PropertiesToronto('CENTRAL'),
-      const PropertiesToronto('EAST'),
-      const PropertiesToronto('WEST'),
-    ];
-
-    _filtersPropertyToronto = [];
     toronto = false;
   }
 
@@ -123,10 +114,4 @@ class _FiltersLocationState extends State<FiltersLocation> {
       ),
     );
   }
-}
-
-
-class PropertiesToronto {
-  const PropertiesToronto(this.name);
-  final String name;
 }
