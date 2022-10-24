@@ -1,0 +1,181 @@
+import 'package:flutter/material.dart';
+
+import 'package:flutter_expansionpanel/constants.dart';
+
+
+class FiltersGtaEast extends StatefulWidget {
+  const FiltersGtaEast({Key? key}) : super(key: key);
+
+  @override
+  State<FiltersGtaEast> createState() => _FiltersGtaEastState();
+}
+
+class _FiltersGtaEastState extends State<FiltersGtaEast> {
+
+  late List<bool> _openCloseIcons;
+  late List<PropertiesGtaEast> _propertiesGtaEast;
+  late List<PropertiesGtaEastOther> _propertiesGtaEastOther;
+  late List<String> _filtersGtaEast;
+
+  //bool citySelectAllGtaEast = Preferences.filtersGtaEastLoggedOut.length == 4;
+  bool citySelectAllGtaEast = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _openCloseIcons = <bool>[
+      false,
+    ];
+
+    _propertiesGtaEast = <PropertiesGtaEast>[
+      const PropertiesGtaEast('Scarbough'),
+      const PropertiesGtaEast('Pickering'),
+      const PropertiesGtaEast('Ajax'),
+      const PropertiesGtaEast('Whitby'),
+      const PropertiesGtaEast('Oshawa'),
+    ];
+    _propertiesGtaEastOther = <PropertiesGtaEastOther>[
+      const PropertiesGtaEastOther('Clarington'),
+      const PropertiesGtaEastOther('Uxbridge'),
+      const PropertiesGtaEastOther('Scugog'),
+      const PropertiesGtaEastOther('Brock'),
+      const PropertiesGtaEastOther('Hamilton'),
+      const PropertiesGtaEastOther('Barrie'),
+      const PropertiesGtaEastOther('Peterborough'),
+      const PropertiesGtaEastOther('Other'),
+    ];
+    _filtersGtaEast = [];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox( height: 1.0, ),
+        const Divider( 
+          thickness: 1.0, 
+          color: kPrimaryColor, 
+          indent: 12.0, 
+          endIndent: 12.0, 
+          height: 0,
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(14.0, 0.0, 14.0, 0.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children:  [
+              const Text('GTA East', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ),),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _filtersGtaEast.clear();
+                    if(citySelectAllGtaEast) {
+                      citySelectAllGtaEast = false;
+                    } else {
+                      citySelectAllGtaEast = true;
+                      for (var element in _propertiesGtaEast) {
+                        _filtersGtaEast.add(element.name);
+                      } 
+                    }
+                    //Preferences.filtersGtaEastLoggedOut = _filtersGtaEast;                      
+                  });
+                },
+                child: Text( citySelectAllGtaEast ? 'Unselect all' : 'Select all', style: const TextStyle( fontSize: 14, fontWeight: FontWeight.w400, color: kSecondaryColor),),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox( height: 14.0, ),        
+        Wrap(
+          children: propertiesGtaEastWidgets.toList(),
+        ),
+        const SizedBox( height: 14.0, ),
+        ExpansionTile(
+          title: const Text('Other', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ),),
+          trailing: Icon(
+            _openCloseIcons[0] ? Icons.remove : Icons.add,
+            color: kPrimaryColor,
+            size: 18.0,
+          ),
+          children: [
+            const SizedBox( height: 14.0,),
+            Wrap(
+              children: propertiesGtaEastOtherWidgets.toList(),
+            ),            
+          ], 
+          onExpansionChanged: (bool expanded) {
+            setState(() => _openCloseIcons[0] = expanded );
+          },         
+        )
+        //Text('Prefs. filterRoomsLoggedOut: ${Preferences.filtersGtaEastLoggedOut}'),
+        //Text('Prefs. filterRoomsLoggedIn: ${Preferences.filtersGtaEastLoggedIn}'),
+      ],
+    );    
+  }
+
+  Iterable<Widget> get propertiesGtaEastWidgets sync* {
+    for (PropertiesGtaEast propertiesGtaEast in _propertiesGtaEast) {
+      yield Padding(
+        padding: const EdgeInsets.symmetric( horizontal: 5.0 ),
+        child: ChoiceChip(
+          label: Container(
+            width: 160,
+            alignment: Alignment.center,
+            child: Text(propertiesGtaEast.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: _filtersGtaEast.contains(propertiesGtaEast.name) ? Colors.white : kPrimaryColor),),
+          ),
+          labelPadding: const EdgeInsets.all(0.0),
+          backgroundColor: const Color(0xFFFFFFFF),
+          selectedColor: kPrimaryColor,
+          shape: const RoundedRectangleBorder(side: BorderSide(), borderRadius: BorderRadius.all(Radius.circular(8))),
+          side: const BorderSide( color: kPrimaryColor ),
+          selected: _filtersGtaEast.contains(propertiesGtaEast.name),
+          onSelected: ( bool selected ) {
+            setState(() {
+                selected ? _filtersGtaEast.add(propertiesGtaEast.name) : _filtersGtaEast.removeWhere((String name) => name == propertiesGtaEast.name) ;
+                //Preferences.filtersGtaEastLoggedOut = _filtersGtaEast;
+            });            
+          },
+        )
+      );
+    }
+  }
+
+  Iterable<Widget> get propertiesGtaEastOtherWidgets sync* {
+    for (PropertiesGtaEastOther propertiesGtaEastOther in _propertiesGtaEastOther) {
+      yield Padding(
+        padding: const EdgeInsets.symmetric( horizontal: 5.0 ),
+        child: ChoiceChip(
+          label: Container(
+            width: 160,
+            alignment: Alignment.center,
+            child: Text(propertiesGtaEastOther.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: _filtersGtaEast.contains(propertiesGtaEastOther.name) ? Colors.white : kPrimaryColor),),
+          ),
+          labelPadding: const EdgeInsets.all(0.0),
+          backgroundColor: const Color(0xFFFFFFFF),
+          selectedColor: kPrimaryColor,
+          shape: const RoundedRectangleBorder(side: BorderSide(), borderRadius: BorderRadius.all(Radius.circular(8))),
+          side: const BorderSide( color: kPrimaryColor ),
+          selected: _filtersGtaEast.contains(propertiesGtaEastOther.name),
+          onSelected: ( bool selected ) {
+            setState(() {
+                selected ? _filtersGtaEast.add(propertiesGtaEastOther.name) : _filtersGtaEast.removeWhere((String name) => name == propertiesGtaEastOther.name) ;
+                //Preferences.filtersGtaEastLoggedOut = _filtersGtaEast;
+            });            
+          },
+        )
+      );
+    }
+  }
+}
+
+
+class PropertiesGtaEast {
+  const PropertiesGtaEast(this.name);
+  final String name;
+}
+
+class PropertiesGtaEastOther {
+  const PropertiesGtaEastOther(this.name);
+  final String name;
+}
