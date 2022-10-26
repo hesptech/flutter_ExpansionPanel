@@ -108,7 +108,7 @@ class _FiltersGtaWestState extends State<FiltersGtaWest> {
         padding: const EdgeInsets.symmetric( horizontal: 5.0 ),
         child: ChoiceChip(
           label: Container(
-            width: 160,
+            width: 150,
             alignment: Alignment.center,
             child: Text(propertiesGtaWest.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: _filtersGtaWest.contains(propertiesGtaWest.name) ? Colors.white : kPrimaryColor),),
           ),
@@ -135,7 +135,7 @@ class _FiltersGtaWestState extends State<FiltersGtaWest> {
         padding: const EdgeInsets.symmetric( horizontal: 5.0, ),
         child: ChoiceChip(
           label: Container(
-            width: 160,
+            width: 150,
             alignment: Alignment.center,
             child: Text(propertiesGtaWestOther.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: _filtersGtaWest.contains(propertiesGtaWestOther.name) ? Colors.white : kPrimaryColor),),
           ),

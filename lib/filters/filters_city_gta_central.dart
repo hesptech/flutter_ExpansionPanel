@@ -80,7 +80,7 @@ class _FiltersCityGtaCentralState extends State<FiltersCityGtaCentral> {
         padding: const EdgeInsets.symmetric( horizontal: 5.0 ),
         child: ChoiceChip(
           label: Container(
-            width: 160,
+            width: 150,
             alignment: Alignment.center,
             child: Text(propertiesCityGtaCentral.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: _filtersCityGtaCentral.contains(propertiesCityGtaCentral.name) ? Colors.white : kPrimaryColor),),
           ),

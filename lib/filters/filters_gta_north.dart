@@ -116,7 +116,7 @@ class _FiltersGtaNorthState extends State<FiltersGtaNorth> {
         padding: const EdgeInsets.symmetric( horizontal: 5.0 ),
         child: ChoiceChip(
           label: Container(
-            width: 160,
+            width: 150,
             alignment: Alignment.center,
             child: Text(propertiesGtaNorth.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: _filtersGtaNorth.contains(propertiesGtaNorth.name) ? Colors.white : kPrimaryColor),),
           ),
@@ -143,7 +143,7 @@ class _FiltersGtaNorthState extends State<FiltersGtaNorth> {
         padding: const EdgeInsets.symmetric( horizontal: 5.0, ),
         child: ChoiceChip(
           label: Container(
-            width: 160,
+            width: 150,
             alignment: Alignment.center,
             child: Text(propertiesGtaWestOther.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: _filtersGtaNorth.contains(propertiesGtaWestOther.name) ? Colors.white : kPrimaryColor),),
           ),
