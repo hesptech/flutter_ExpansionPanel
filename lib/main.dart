@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expansionpanel/filters/filters.dart';
+import 'package:flutter_expansionpanel/filters/filters_bathrooms.dart';
+import 'package:flutter_expansionpanel/filters/filters_bedrooms.dart';
+import 'package:flutter_expansionpanel/filters/filters_class_icons_bt.dart';
 import 'package:flutter_expansionpanel/filters/filters_location.dart';
+import 'package:flutter_expansionpanel/filters/filters_more.dart';
+import 'package:flutter_expansionpanel/filters/filters_price_range.dart';
 import 'package:flutter_expansionpanel/widgets_formatting.dart';
 
 void main() {
@@ -51,12 +56,19 @@ class FiltersScreen extends StatelessWidget {
       child: Column(
         children: const <Widget>[
           SizedBox( height: 28.0,),
+          FiltersPriceRange(),
+          FiltersClassIconsBt(),
+          SizedBox( height: 28.0,), 
           GreenDivider(),
           FiltersPropertyType(),
           GreenDivider(),
           FiltersLocation(),
           GreenDivider(),
+          FiltersBedrooms(),
+          FiltersBathrooms(),
+          FiltersMore(),
           SizedBox( height: 14.0,),
+
         ],
       )      
     );
