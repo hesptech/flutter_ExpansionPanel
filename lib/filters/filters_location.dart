@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 //import 'package:b_w0/helpers/shared_preferences.dart';
 import 'package:flutter_expansionpanel/constants.dart';
-import 'package:flutter_expansionpanel/filters/filters_city_gta_central.dart';
-import 'package:flutter_expansionpanel/filters/filters_city_gta_north.dart';
+import 'package:flutter_expansionpanel/filters/filters_tr_central.dart';
+import 'package:flutter_expansionpanel/filters/filters_tr_east.dart';
 import 'package:flutter_expansionpanel/filters/filters_tr_west.dart';
 import 'package:flutter_expansionpanel/filters/filters_gta_north.dart';
 import 'package:flutter_expansionpanel/filters/filters_gta_east.dart';
@@ -62,9 +62,9 @@ class _FiltersLocationState extends State<FiltersLocation> {
                     size: 18.0,
                   ),
                   children: const [
-                    FiltersCityGtaCentral(),
+                    FiltersTrCentral(),
                     SizedBox( height: 16.0,),
-                    FiltersCityGtaNorth(),
+                    FiltersTrEast(),
                     SizedBox( height: 16.0,),
                     FiltersTrWest(),
                     SizedBox( height: 16.0,)
@@ -95,7 +95,6 @@ class _FiltersLocationState extends State<FiltersLocation> {
                     FiltersGtaEast(),
                   ],
                   onExpansionChanged: (bool expanded) {
-                    print(expanded);
                     setState(() => _openCloseIcons[2] = expanded );
                   },
                 ),                

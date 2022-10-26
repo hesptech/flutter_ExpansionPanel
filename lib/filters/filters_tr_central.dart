@@ -1,0 +1,108 @@
+import 'package:flutter/material.dart';
+
+import 'package:flutter_expansionpanel/constants.dart';
+
+
+class FiltersTrCentral extends StatefulWidget {
+  const FiltersTrCentral({Key? key}) : super(key: key);
+
+  @override
+  State<FiltersTrCentral> createState() => _FiltersTrCentralState();
+}
+
+class _FiltersTrCentralState extends State<FiltersTrCentral> {
+
+  late List<PropertiesTrCentral> _propertiesTrCentral;
+  late List<String> _filtersTrCentral;
+
+  //bool citySelectAllGtaCentral = Preferences.filtersTrCentralLoggedOut.length == 4;
+  bool citySelectAllGtaCentral = false;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _propertiesTrCentral = <PropertiesTrCentral>[
+      const PropertiesTrCentral('Downtown Toronto'),
+      const PropertiesTrCentral('Midtown Toronto'),
+      const PropertiesTrCentral('Leaside'),
+      const PropertiesTrCentral('Toronto New York'),
+    ];
+    _filtersTrCentral = [];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox( height: 1.0, ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(14.0, 0.0, 14.0, 0.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children:  [
+              const Text('Toronto Central', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ),),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _filtersTrCentral.clear();
+                    if(citySelectAllGtaCentral) {
+                      citySelectAllGtaCentral = false;
+                    } else {
+                      citySelectAllGtaCentral = true;
+                      for (var element in _propertiesTrCentral) {
+                        _filtersTrCentral.add(element.name);
+                      } 
+                    }
+                    //Preferences.filtersTrCentralLoggedOut = _filtersTrCentral;                      
+                  });
+                },
+                child: Text( citySelectAllGtaCentral ? 'Unselect all' : 'Select all', style: const TextStyle( fontSize: 14, fontWeight: FontWeight.w400, color: kSecondaryColor),),
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox( height: 14.0, ),        
+        Wrap(
+          children: propertiesTrCentralWidgets.toList(),
+        ),
+        //Text('Prefs. filterRoomsLoggedOut: ${Preferences.filtersTrCentralLoggedOut}'),
+        //Text('Prefs. filterRoomsLoggedIn: ${Preferences.filtersTrCentralLoggedIn}'),
+      ],
+    );
+  }
+
+
+  Iterable<Widget> get propertiesTrCentralWidgets sync* {
+    for (PropertiesTrCentral propertiesTrCentral in _propertiesTrCentral) {
+      yield Padding(
+        padding: const EdgeInsets.symmetric( horizontal: 5.0 ),
+        child: ChoiceChip(
+          label: Container(
+            width: 150,
+            alignment: Alignment.center,
+            child: Text(propertiesTrCentral.name, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: _filtersTrCentral.contains(propertiesTrCentral.name) ? Colors.white : kPrimaryColor),),
+          ),
+          labelPadding: const EdgeInsets.all(0.0),
+          backgroundColor: const Color(0xFFFFFFFF),
+          selectedColor: kPrimaryColor,
+          shape: const RoundedRectangleBorder(side: BorderSide(), borderRadius: BorderRadius.all(Radius.circular(8))),
+          side: const BorderSide( color: kPrimaryColor ),
+          selected: _filtersTrCentral.contains(propertiesTrCentral.name),
+          onSelected: ( bool selected ) {
+            setState(() {
+                selected ? _filtersTrCentral.add(propertiesTrCentral.name) : _filtersTrCentral.removeWhere((String name) => name == propertiesTrCentral.name) ;
+                //Preferences.filtersTrCentralLoggedOut = _filtersTrCentral;
+            });            
+          },
+        )
+      );
+    }
+  }
+}
+
+class PropertiesTrCentral {
+  const PropertiesTrCentral(this.name);
+  final String name;
+}
