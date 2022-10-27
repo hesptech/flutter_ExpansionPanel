@@ -28,3 +28,34 @@ class BlueDivider extends StatelessWidget {
     height: 0,    
   );
 }
+
+
+class BtChoiceChip extends StatelessWidget {
+  final String btText;
+  final Color? btColor;
+  final Color? btBackgroundColor;
+  final Color? btSelectedColor;
+  final Color? btSideBorderColor;
+  final bool? btSelected;
+  final void Function(bool) btOnSelected;
+
+
+  const BtChoiceChip({Key? key, required this.btText, this.btColor, this.btBackgroundColor, this.btSelectedColor, this.btSideBorderColor, this.btSelected, required this.btOnSelected}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoiceChip(
+      label: Container(
+        width: 140,          
+        alignment: Alignment.center,
+        child: Text(btText, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: btColor ?? kPrimaryColor,),),
+      ),
+      backgroundColor: btBackgroundColor ?? Colors.white,
+      selectedColor: btSelectedColor ?? kPrimaryColor,
+      shape: const RoundedRectangleBorder(side: BorderSide(), borderRadius: BorderRadius.all(Radius.circular(8))),
+      side: BorderSide( color: btSideBorderColor ?? kPrimaryColor ),
+      selected: btSelected ?? false,
+      onSelected: btOnSelected,
+    );    
+  }
+}

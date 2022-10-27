@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_expansionpanel/filters/filters.dart';
 import 'package:flutter_expansionpanel/filters/filters_bathrooms.dart';
 import 'package:flutter_expansionpanel/filters/filters_bedrooms.dart';
@@ -68,7 +69,12 @@ class FiltersScreen extends StatelessWidget {
           FiltersBathrooms(),
           FiltersMore(),
           SizedBox( height: 14.0,),
-
+          /* 
+          // to work, delete const from children array + import constants
+          BtChoiceChip(
+            btText: 'bttext', btColor: kPrimaryColor, btBackgroundColor: Colors.white, btSelectedColor: kPrimaryColor, btSideBorderColor: kPrimaryColor, btSelected: false, 
+            btOnSelected: (randomargument){},  
+          ) */
         ],
       )      
     );

@@ -168,6 +168,32 @@ class _FiltersPropertyTypeState extends State<FiltersPropertyType> {
             });
           },
         )
+
+        /* child: BtChoiceChip(
+          btText: propertiesTypesOthers.name, 
+          btColor: _filtersPropertyType.contains(propertiesTypesOthers.name) ? Colors.white : kPrimaryColor, 
+          btBackgroundColor: Colors.white, 
+          btSelectedColor: kPrimaryColor, 
+          btSideBorderColor: kPrimaryColor, 
+          btSelected: _filtersPropertyType.contains(propertiesTypesOthers.name), 
+          btOnSelected: (bool selected) { 
+            setState(() {
+              selected ? _filtersPropertyType.add(propertiesTypesOthers.name) : _filtersPropertyType.removeWhere((String name) => name == propertiesTypesOthers.name) ;
+            });
+          },  
+        ), */
+
+        /* child: BtChoiceChip(
+          btText: propertiesTypesOthers.name, 
+          btColor: _filtersPropertyType.contains(propertiesTypesOthers.name) ? Colors.white : kPrimaryColor,  
+          btSelected: _filtersPropertyType.contains(propertiesTypesOthers.name), 
+          btOnSelected: (bool selected) { 
+            setState(() {
+              selected ? _filtersPropertyType.add(propertiesTypesOthers.name) : _filtersPropertyType.removeWhere((String name) => name == propertiesTypesOthers.name) ;
+            });
+          },  
+        ), */
+
       );
     }
   }
