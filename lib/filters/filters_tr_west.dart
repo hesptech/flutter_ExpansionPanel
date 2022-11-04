@@ -13,15 +13,24 @@ class FiltersTrWest extends StatefulWidget {
 
 class _FiltersTrWestState extends State<FiltersTrWest> {
 
+  late List<bool> _openCloseIcons;
   late List<PropertiesTrWest> _propertiesTrWest;
   late List<String> _filtersTrWest;
 
   //bool citySelectAllTrWest = Preferences.filtersTrWestLoggedOut.length == 4;
-  bool citySelectAllTrWest = false;
+  bool citySelectAll = false;
 
   @override
   void initState() {
     super.initState();
+
+    _openCloseIcons = <bool>[
+      false,
+      false,
+      false,
+      false,
+      false,
+    ];
     
     _propertiesTrWest = <PropertiesTrWest>[
       const PropertiesTrWest('High Park and around'),
@@ -35,7 +44,57 @@ class _FiltersTrWestState extends State<FiltersTrWest> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    
+    return 
+      ExpansionTile(
+        title: const Text('Toronto West', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ),),
+        trailing: Icon(
+          _openCloseIcons[0] ? Icons.remove : Icons.add,
+          color: kPrimaryColor,
+          size: 18.0,
+        ),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _filtersTrWest.clear() ;
+                    if(citySelectAll) {
+                      citySelectAll = false;
+                    } else {
+                      citySelectAll = true;
+                      for (var element in _propertiesTrWest) {
+                        _filtersTrWest.add(element.name) ;
+                      }
+                    }
+                    //isLoggedIn ? Preferences.userFiltersTrEastLoggedIn = _filtersSearchTrEastLoggedIn : Preferences.userFiltersTrEast = _filtersSearchTrEast ;
+                  });  
+                }, 
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  minimumSize: const Size( 50.0, 30.0 ),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  //alignment: Alignment.centerLeft
+                ),
+                child: Text(citySelectAll ? 'Unselect all' : 'Select all', style: const TextStyle( fontSize: 14, fontWeight: FontWeight.w400, color: kSecondaryColor),),
+              ),
+              const SizedBox( width: 28.0),
+            ],
+          ),
+          Wrap(
+            children: propertiesTrWestWidgets.toList(),
+          ),
+          const SizedBox( height: 16.0,),
+        ],
+        onExpansionChanged: (bool expanded) {
+          setState(() => _openCloseIcons[0] = expanded );
+        },
+      );
+
+
+    /* return Column(
       children: [
         const SizedBox( height: 1.0, ),
         const Divider( 
@@ -79,7 +138,7 @@ class _FiltersTrWestState extends State<FiltersTrWest> {
         //Text('Prefs. filterRoomsLoggedOut: ${Preferences.filtersTrWestLoggedOut}'),
         //Text('Prefs. filterRoomsLoggedIn: ${Preferences.filtersTrWestLoggedIn}'),
       ],
-    );    
+    ); */    
   }
 
   Iterable<Widget> get propertiesTrWestWidgets sync* {

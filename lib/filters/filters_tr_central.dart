@@ -12,6 +12,7 @@ class FiltersTrCentral extends StatefulWidget {
 
 class _FiltersTrCentralState extends State<FiltersTrCentral> {
 
+  late List<bool> _openCloseIcons;
   late List<PropertiesTrCentral> _propertiesTrCentral;
   late List<String> _filtersTrCentral;
 
@@ -22,6 +23,15 @@ class _FiltersTrCentralState extends State<FiltersTrCentral> {
   @override
   void initState() {
     super.initState();
+
+    _openCloseIcons = <bool>[
+      false,
+      false,
+      false,
+      false,
+      false,
+    ]; 
+
     _propertiesTrCentral = <PropertiesTrCentral>[
       const PropertiesTrCentral('Downtown Toronto'),
       const PropertiesTrCentral('Midtown Toronto'),
@@ -33,7 +43,57 @@ class _FiltersTrCentralState extends State<FiltersTrCentral> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+
+    return 
+      ExpansionTile(
+        title: const Text('Toronto Central', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ),),
+        trailing: Icon(
+          _openCloseIcons[0] ? Icons.remove : Icons.add,
+          color: kPrimaryColor,
+          size: 18.0,
+        ),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _filtersTrCentral.clear();
+                    if(citySelectAllGtaCentral) {
+                      citySelectAllGtaCentral = false;
+                    } else {
+                      citySelectAllGtaCentral = true;
+                      for (var element in _propertiesTrCentral) {
+                        _filtersTrCentral.add(element.name);
+                      } 
+                    }
+                    //Preferences.filtersTrCentralLoggedOut = _filtersTrCentral;                      
+                  });
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  minimumSize: const Size( 50.0, 30.0 ),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  //alignment: Alignment.centerLeft
+                ),
+                child: Text( citySelectAllGtaCentral ? 'Unselect all' : 'Select all', style: const TextStyle( fontSize: 14, fontWeight: FontWeight.w400, color: kSecondaryColor, ),),
+              ),
+              const SizedBox( width: 28.0),
+            ],
+          ),
+          Wrap(
+            children: propertiesTrCentralWidgets.toList(),
+          ),
+          const SizedBox( height: 16.0,),
+        ],
+        onExpansionChanged: (bool expanded) {
+          setState(() => _openCloseIcons[0] = expanded );
+        },
+      );
+
+
+    /* return Column(
       children: [
         const SizedBox( height: 1.0, ),
         Padding(
@@ -70,7 +130,7 @@ class _FiltersTrCentralState extends State<FiltersTrCentral> {
         //Text('Prefs. filterRoomsLoggedOut: ${Preferences.filtersTrCentralLoggedOut}'),
         //Text('Prefs. filterRoomsLoggedIn: ${Preferences.filtersTrCentralLoggedIn}'),
       ],
-    );
+    ); */
   }
 
 

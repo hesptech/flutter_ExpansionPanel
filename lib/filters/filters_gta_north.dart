@@ -18,7 +18,7 @@ class _FiltersGtaNorthState extends State<FiltersGtaNorth> {
   late List<String> _filtersGtaNorth;
 
   //bool citySelectAllGtaNorth = Preferences.filtersGtaNorthLoggedOut.length == 4;
-  bool citySelectAllGtaNorth = false;
+  bool citySelectAll = false;
 
   @override
   void initState() {
@@ -46,7 +46,68 @@ class _FiltersGtaNorthState extends State<FiltersGtaNorth> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+
+    return 
+      ExpansionTile(
+        title: const Text('GTA North', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ),),
+        trailing: Icon(
+          _openCloseIcons[0] ? Icons.remove : Icons.add,
+          color: kPrimaryColor,
+          size: 18.0,
+        ),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _filtersGtaNorth.clear() ;
+                    if(citySelectAll) {
+                      citySelectAll = false;
+                    } else {
+                      citySelectAll = true;
+                      for (var element in _propertiesGtaNorth) {
+                        _filtersGtaNorth.add(element.name) ;
+                      }
+                    }
+                    //isLoggedIn ? Preferences.userFiltersTrEastLoggedIn = _filtersSearchTrEastLoggedIn : Preferences.userFiltersTrEast = _filtersSearchTrEast ;
+                  });  
+                }, 
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  minimumSize: const Size( 50.0, 30.0 ),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  //alignment: Alignment.centerLeft
+                ),
+                child: Text(citySelectAll ? 'Unselect all' : 'Select all', style: const TextStyle( fontSize: 14, fontWeight: FontWeight.w400, color: kSecondaryColor),),
+              ),
+              const SizedBox( width: 28.0),
+            ],
+          ),
+          Wrap(
+            children: propertiesGtaNorthWidgets.toList(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              SizedBox( width: 16.0, height: 42.0,),
+              Text('Other', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ), textAlign: TextAlign.start, ),
+            ],
+          ),
+          Wrap(
+            children: propertiesGtaNorthOtherWidgets.toList(),
+          ),
+          const SizedBox( height: 16.0,),
+        ],
+        onExpansionChanged: (bool expanded) {
+          setState(() => _openCloseIcons[0] = expanded );
+        },
+      );
+
+
+
+    /* return Column(
       children: [
         const SizedBox( height: 1.0, ),
         const Divider( 
@@ -107,7 +168,7 @@ class _FiltersGtaNorthState extends State<FiltersGtaNorth> {
         //Text('Prefs. filterRoomsLoggedOut: ${Preferences.filtersGtaNorthLoggedOut}'),
         //Text('Prefs. filterRoomsLoggedIn: ${Preferences.filtersGtaNorthLoggedIn}'),
       ],
-    );    
+    ); */    
   }
 
   Iterable<Widget> get propertiesGtaNorthWidgets sync* {

@@ -11,17 +11,26 @@ class FiltersTrEast extends StatefulWidget {
 
 class _FiltersTrEastState extends State<FiltersTrEast> {
 
+  late List<bool> _openCloseIcons;
   late List<PropertiesTrEast> _propertiesTrEast;
   late List<String> _filtersSearchTrEast;
   late List<String> _filtersSearchTrEastLoggedIn;
 
-  bool citySelectAllGtaNorth = false;
+  bool citySelectAll = false;
   final isLoggedIn = false;
 
 
   @override
   void initState() {
     super.initState();
+
+    _openCloseIcons = <bool>[
+      false,
+      false,
+      false,
+      false,
+      false,
+    ]; 
 
     _propertiesTrEast = <PropertiesTrEast>[
       const PropertiesTrEast('Danforth'),
@@ -37,7 +46,58 @@ class _FiltersTrEastState extends State<FiltersTrEast> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+
+    return 
+      ExpansionTile(
+        title: const Text('Toronto East', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ),),
+        trailing: Icon(
+          _openCloseIcons[0] ? Icons.remove : Icons.add,
+          color: kPrimaryColor,
+          size: 18.0,
+        ),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _filtersSearchTrEast.clear() ;
+                    if(citySelectAll) {
+                      citySelectAll = false;
+                    } else {
+                      citySelectAll = true;
+                      for (var element in _propertiesTrEast) {
+                        _filtersSearchTrEast.add(element.name) ;
+                      }
+                    }
+                    //isLoggedIn ? Preferences.userFiltersTrEastLoggedIn = _filtersSearchTrEastLoggedIn : Preferences.userFiltersTrEast = _filtersSearchTrEast ;
+                  });  
+                }, 
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  minimumSize: const Size( 50.0, 30.0 ),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  //alignment: Alignment.centerLeft
+                ),
+                child: Text(citySelectAll ? 'Unselect all' : 'Select all', style: const TextStyle( fontSize: 14, fontWeight: FontWeight.w400, color: kSecondaryColor),),
+              ),
+              const SizedBox( width: 28.0),
+            ],
+          ),
+          Wrap(
+            children:  propertiesTrEastWidgets.toList(),
+          ),
+          const SizedBox( height: 16.0,),
+        ],
+        onExpansionChanged: (bool expanded) {
+          setState(() => _openCloseIcons[0] = expanded );
+        },
+      );
+
+
+
+    /* return Column(
       children: [
         const SizedBox( height: 1.0, ),
         const Divider( 
@@ -57,10 +117,10 @@ class _FiltersTrEastState extends State<FiltersTrEast> {
                 onPressed: () {
                   setState(() {
                     _filtersSearchTrEast.clear() ;
-                    if(citySelectAllGtaNorth) {
-                      citySelectAllGtaNorth = false;
+                    if(citySelectAll) {
+                      citySelectAll = false;
                     } else {
-                      citySelectAllGtaNorth = true;
+                      citySelectAll = true;
                       for (var element in _propertiesTrEast) {
                         _filtersSearchTrEast.add(element.name) ;
                       }
@@ -68,7 +128,7 @@ class _FiltersTrEastState extends State<FiltersTrEast> {
                     //isLoggedIn ? Preferences.userFiltersTrEastLoggedIn = _filtersSearchTrEastLoggedIn : Preferences.userFiltersTrEast = _filtersSearchTrEast ;
                   });  
                 }, 
-                child: Text(citySelectAllGtaNorth ? 'Unselect all' : 'Select all', style: const TextStyle( fontSize: 14, fontWeight: FontWeight.w400, color: kSecondaryColor),),
+                child: Text(citySelectAll ? 'Unselect all' : 'Select all', style: const TextStyle( fontSize: 14, fontWeight: FontWeight.w400, color: kSecondaryColor),),
               )
             ],
           ),
@@ -80,7 +140,7 @@ class _FiltersTrEastState extends State<FiltersTrEast> {
         //Text('Prefs. notLoged city: ${Preferences.userFiltersTrEast}'),
         //Text('Prefs. notLoged city: ${_filtersSearchTrEast.join(', ')}'),
       ],
-    );
+    ); */
   }
 
   Iterable<Widget> get propertiesTrEastWidgets sync* {

@@ -18,7 +18,7 @@ class _FiltersGtaEastState extends State<FiltersGtaEast> {
   late List<String> _filtersGtaEast;
 
   //bool citySelectAllGtaEast = Preferences.filtersGtaEastLoggedOut.length == 4;
-  bool citySelectAllGtaEast = false;
+  bool citySelectAll = false;
 
   @override
   void initState() {
@@ -50,7 +50,68 @@ class _FiltersGtaEastState extends State<FiltersGtaEast> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+
+    return 
+      ExpansionTile(
+        title: const Text('GTA East', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ),),
+        trailing: Icon(
+          _openCloseIcons[0] ? Icons.remove : Icons.add,
+          color: kPrimaryColor,
+          size: 18.0,
+        ),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _filtersGtaEast.clear() ;
+                    if(citySelectAll) {
+                      citySelectAll = false;
+                    } else {
+                      citySelectAll = true;
+                      for (var element in _propertiesGtaEast) {
+                        _filtersGtaEast.add(element.name) ;
+                      }
+                    }
+                    //isLoggedIn ? Preferences.userFiltersTrEastLoggedIn = _filtersSearchTrEastLoggedIn : Preferences.userFiltersTrEast = _filtersSearchTrEast ;
+                  });  
+                }, 
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  minimumSize: const Size( 50.0, 30.0 ),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  //alignment: Alignment.centerLeft
+                ),
+                child: Text(citySelectAll ? 'Unselect all' : 'Select all', style: const TextStyle( fontSize: 14, fontWeight: FontWeight.w400, color: kSecondaryColor),),
+              ),
+              const SizedBox( width: 28.0),
+            ],
+          ),
+          Wrap(
+            children: propertiesGtaEastWidgets.toList(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              SizedBox( width: 16.0, height: 42.0,),
+              Text('Other', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ), textAlign: TextAlign.start, ),
+            ],
+          ),
+          Wrap(
+            children: propertiesGtaEastOtherWidgets.toList(),
+          ),
+          const SizedBox( height: 16.0,),
+        ],
+        onExpansionChanged: (bool expanded) {
+          setState(() => _openCloseIcons[0] = expanded );
+        },
+      );
+
+
+
+   /*  return Column(
       children: [
         const SizedBox( height: 1.0, ),
         const Divider( 
@@ -111,7 +172,7 @@ class _FiltersGtaEastState extends State<FiltersGtaEast> {
         //Text('Prefs. filterRoomsLoggedOut: ${Preferences.filtersGtaEastLoggedOut}'),
         //Text('Prefs. filterRoomsLoggedIn: ${Preferences.filtersGtaEastLoggedIn}'),
       ],
-    );    
+    ); */    
   }
 
   Iterable<Widget> get propertiesGtaEastWidgets sync* {

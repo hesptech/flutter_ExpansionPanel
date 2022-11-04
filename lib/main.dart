@@ -9,9 +9,11 @@ import 'package:flutter_expansionpanel/filters/filters_more.dart';
 import 'package:flutter_expansionpanel/filters/filters_price_range.dart';
 import 'package:flutter_expansionpanel/widgets_formatting.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -19,22 +21,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: MyHomePage(),
+      home: const MyHomePage(),
+      theme: ThemeData(
+
+        scaffoldBackgroundColor: Colors.white,
+      ),
     );
   }
 }
 
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
-
-  
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
 
 class _MyHomePageState extends State<MyHomePage> {
 

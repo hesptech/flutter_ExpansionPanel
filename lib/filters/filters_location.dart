@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 //import 'package:b_w0/helpers/shared_preferences.dart';
 import 'package:flutter_expansionpanel/constants.dart';
+import 'package:flutter_expansionpanel/filters/filters_location_topbts.dart';
 import 'package:flutter_expansionpanel/filters/filters_tr_central.dart';
 import 'package:flutter_expansionpanel/filters/filters_tr_east.dart';
 import 'package:flutter_expansionpanel/filters/filters_tr_west.dart';
 import 'package:flutter_expansionpanel/filters/filters_gta_north.dart';
 import 'package:flutter_expansionpanel/filters/filters_gta_east.dart';
 import 'package:flutter_expansionpanel/filters/filters_gta_west.dart';
+import 'package:flutter_expansionpanel/widgets_formatting.dart';
 
 
 class FiltersLocation extends StatefulWidget {
@@ -28,6 +30,7 @@ class _FiltersLocationState extends State<FiltersLocation> {
     super.initState();
 
     _openCloseIcons = <bool>[
+      false,
       false,
       false,
       false,
@@ -54,7 +57,49 @@ class _FiltersLocationState extends State<FiltersLocation> {
                 color: kSecondaryColor,
               ),
               children: <Widget>[
+                
+
+
+                const FiltersLocationTopbts(),
                 ExpansionTile(
+                  title: const Text('more or specific location', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ),),
+                  trailing: Icon(
+                    _openCloseIcons[4] ? Icons.remove : Icons.add,
+                    color: kPrimaryColor,
+                    size: 18.0,
+                  ),
+                  children: const [
+                    FiltersTrCentral(),
+                    BlueDivider(),
+                    FiltersTrEast(),
+                    BlueDivider(),
+                    FiltersTrWest(),
+                    BlueDivider(),
+                    FiltersGtaWest(),
+                    BlueDivider(),
+                    FiltersGtaNorth(),
+                    BlueDivider(),
+                    FiltersGtaEast(),
+                  ],
+                  onExpansionChanged: (bool expanded) {
+                    setState(() => _openCloseIcons[4] = expanded );
+                  },
+                ),
+                const Divider( 
+                  thickness: 1.0, 
+                  color: kPrimaryColor, 
+                  indent: 12.0, 
+                  endIndent: 12.0, 
+                  height: 0,
+                ),
+                
+
+
+
+
+
+                
+                /* ExpansionTile(
                   title: const Text('TORONTO', style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w500, ),),
                   trailing: Icon(
                     _openCloseIcons[1] ? Icons.remove : Icons.add,
@@ -97,7 +142,7 @@ class _FiltersLocationState extends State<FiltersLocation> {
                   onExpansionChanged: (bool expanded) {
                     setState(() => _openCloseIcons[2] = expanded );
                   },
-                ),                
+                ), */                
               ],
               onExpansionChanged: (bool expanded) {
                 print(expanded);
