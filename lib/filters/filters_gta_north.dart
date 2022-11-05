@@ -37,7 +37,7 @@ class _FiltersGtaNorthState extends State<FiltersGtaNorth> {
       const PropertiesGtaNorthOther('Newmarket'),
       const PropertiesGtaNorthOther('Aurora'),
       const PropertiesGtaNorthOther('King'),
-      const PropertiesGtaNorthOther('Withchurch/Sotuffville'),
+      const PropertiesGtaNorthOther('Withchurch/Stouffville'),
       const PropertiesGtaNorthOther('Georgina'),
       const PropertiesGtaNorthOther('East Gwillingbury'),
     ];

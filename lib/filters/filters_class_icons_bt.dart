@@ -11,7 +11,7 @@ class FiltersClassIconsBt extends StatefulWidget {
 
 class _FiltersClassIconsBtState extends State<FiltersClassIconsBt> {
 
-  bool imageHouseOn = true;
+  bool imageHouseOn = false;
   bool imageCondoOn = false;
 
   @override
@@ -48,8 +48,7 @@ class _FiltersClassIconsBtState extends State<FiltersClassIconsBt> {
           ),
           onTap: () {
             setState(() {
-              imageHouseOn = true;
-              imageCondoOn = false;
+              imageHouseOn ? imageHouseOn = false : imageHouseOn = true;
               /* Preferences.filterIconBtHouse = imageHouseOn;
               Preferences.filterIconBtCondo = imageCondoOn; */
             });
@@ -78,8 +77,8 @@ class _FiltersClassIconsBtState extends State<FiltersClassIconsBt> {
           ),
           onTap: () {
             setState(() {
-              imageCondoOn = true;
-              imageHouseOn = false;
+              imageCondoOn ? imageCondoOn = false : imageCondoOn = true ;
+
               /* Preferences.filterIconBtHouse = imageHouseOn;
               Preferences.filterIconBtCondo = imageCondoOn; */        
             });

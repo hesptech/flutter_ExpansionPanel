@@ -113,7 +113,7 @@ class _FiltersPropertyIconsState extends State<FiltersPropertyIcons> {
             child: Column(
               children: [
                 Icon(
-                  Icons.apartment, size: 50.0, 
+                  Icons.holiday_village_outlined, size: 50.0, 
                   color: imageOn3 ? Colors.white : kPrimaryColor,
                 ),
                 const Text('TOWNHOUSE', style: TextStyle( color: Colors.transparent , fontSize: 14.0, ), ),
