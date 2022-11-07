@@ -40,10 +40,6 @@ class _FiltersGtaEastState extends State<FiltersGtaEast> {
       const PropertiesGtaEastOther('Uxbridge'),
       const PropertiesGtaEastOther('Scugog'),
       const PropertiesGtaEastOther('Brock'),
-      const PropertiesGtaEastOther('Hamilton'),
-      const PropertiesGtaEastOther('Barrie'),
-      const PropertiesGtaEastOther('Peterborough'),
-      const PropertiesGtaEastOther('Other'),
     ];
     _filtersGtaEast = [];
   }

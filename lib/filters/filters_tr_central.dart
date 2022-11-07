@@ -36,7 +36,7 @@ class _FiltersTrCentralState extends State<FiltersTrCentral> {
       const PropertiesTrCentral('Downtown Toronto'),
       const PropertiesTrCentral('Midtown Toronto'),
       const PropertiesTrCentral('Leaside'),
-      const PropertiesTrCentral('Toronto New York'),
+      const PropertiesTrCentral('Toronto North York'),
     ];
     _filtersTrCentral = [];
   }

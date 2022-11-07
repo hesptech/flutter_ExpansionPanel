@@ -34,7 +34,7 @@ class _FiltersTrWestState extends State<FiltersTrWest> {
     
     _propertiesTrWest = <PropertiesTrWest>[
       const PropertiesTrWest('High Park and around'),
-      const PropertiesTrWest('Junction Park and around'),
+      const PropertiesTrWest('Junction and around'),
       const PropertiesTrWest('Etobicoke'),
       const PropertiesTrWest('Mimico'),
       const PropertiesTrWest('Other'),

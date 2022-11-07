@@ -30,7 +30,7 @@ class _FiltersGtaWestState extends State<FiltersGtaWest> {
 
     _propertiesGtaWest = <PropertiesGtaWest>[
       const PropertiesGtaWest('Etobicoke'),
-      const PropertiesGtaWest('Missisauga'),
+      const PropertiesGtaWest('Mississauga'),
       const PropertiesGtaWest('Brampton'),
       const PropertiesGtaWest('Oakville'),
       const PropertiesGtaWest('Milton'),
@@ -38,7 +38,7 @@ class _FiltersGtaWestState extends State<FiltersGtaWest> {
     ];
     _propertiesGtaWestOther = <PropertiesGtaWestOther>[
       const PropertiesGtaWestOther('Halton Hills'),
-      const PropertiesGtaWestOther('Celedon'),
+      const PropertiesGtaWestOther('Caledon'),
     ];
     _filtersGtaWest = [];
   }

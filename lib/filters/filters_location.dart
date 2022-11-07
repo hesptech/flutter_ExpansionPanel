@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 //import 'package:b_w0/helpers/shared_preferences.dart';
 import 'package:flutter_expansionpanel/constants.dart';
 import 'package:flutter_expansionpanel/filters/filters_location_topbts.dart';
+import 'package:flutter_expansionpanel/filters/filters_other.dart';
 import 'package:flutter_expansionpanel/filters/filters_tr_central.dart';
 import 'package:flutter_expansionpanel/filters/filters_tr_east.dart';
 import 'package:flutter_expansionpanel/filters/filters_tr_west.dart';
@@ -80,6 +81,8 @@ class _FiltersLocationState extends State<FiltersLocation> {
                     FiltersGtaNorth(),
                     BlueDivider(),
                     FiltersGtaEast(),
+                    BlueDivider(),
+                    FiltersOther(),
                   ],
                   onExpansionChanged: (bool expanded) {
                     setState(() => _openCloseIcons[4] = expanded );

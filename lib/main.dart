@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_expansionpanel/constants.dart';
 
 import 'package:flutter_expansionpanel/filters/filters.dart';
 import 'package:flutter_expansionpanel/filters/filters_bathrooms.dart';
 import 'package:flutter_expansionpanel/filters/filters_bedrooms.dart';
+import 'package:flutter_expansionpanel/filters/filters_bottom_bar.dart';
 import 'package:flutter_expansionpanel/filters/filters_class_icons_bt.dart';
 import 'package:flutter_expansionpanel/filters/filters_location.dart';
 import 'package:flutter_expansionpanel/filters/filters_more.dart';
@@ -26,7 +28,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       home: const MyHomePage(),
       theme: ThemeData(
-
+        appBarTheme: const AppBarTheme(
+          color: kPrimaryColor,
+        ),
         scaffoldBackgroundColor: Colors.white,
       ),
     );
@@ -46,8 +50,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(child: FiltersScreen()), 
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        centerTitle: true,
+        title: const Text('Personalize Listing'),
+      ),
+      body: const SafeArea(child: FiltersScreen()), 
+      bottomNavigationBar: const FiltersBottomBar(),
     );
   }
 }
@@ -61,20 +71,24 @@ class FiltersScreen extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
-        children: const <Widget>[
-          SizedBox( height: 28.0,),
-          FiltersPriceRange(),
-          FiltersClassIconsBt(),
-          SizedBox( height: 28.0,), 
-          GreenDivider(),
-          FiltersPropertyType(),
-          GreenDivider(),
-          FiltersLocation(),
-          GreenDivider(),
-          FiltersBedrooms(),
-          FiltersBathrooms(),
-          FiltersMore(),
-          SizedBox( height: 14.0,),
+        children: <Widget>[
+          Container(
+            height: 5,
+            color: kSecondaryColor,
+          ),
+          //const SizedBox( height: 14.0,),
+          const FiltersPriceRange(),
+          const FiltersClassIconsBt(),
+          const SizedBox( height: 28.0,), 
+          const GreenDivider(),
+          const FiltersPropertyType(),
+          const GreenDivider(),
+          const FiltersLocation(),
+          const GreenDivider(),
+          const FiltersBedrooms(),
+          const FiltersBathrooms(),
+          const FiltersMore(),
+          const SizedBox( height: 14.0,),
           /* 
           // to work, delete const from children array + import constants
           BtChoiceChip(
